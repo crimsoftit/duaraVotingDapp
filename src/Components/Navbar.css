@@ -1,0 +1,22 @@
+.barHouse{
+    height: 6vh;
+    background: black;
+    color:white;
+    display:grid;
+    grid-template-columns: 4fr 1fr;
+}
+
+.pageTitle{
+    display:flex;
+    justify-content: left;
+    align-items: center;
+    padding-left:5%;
+}
+
+.account{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
