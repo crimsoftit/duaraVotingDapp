@@ -6,7 +6,7 @@ import cand2 from '../assets/cand2.png';
 const PollingStation = (props) => {
 	const [cand1Url, changeCand1Url] = useState(cand1);
 	const [cand2Url, changeCand2Url] = useState(cand2);
-	const [displayResults, alterResultsDisplay] = useState(true);
+	const [displayResults, alterResultsDisplay] = useState(false);
 
 	return (
 		<Container>

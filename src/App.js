@@ -14,7 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import components
 import PollingStation from './Components/PollingStation';
 import Home from './Components/Home';
-import NewPoll from './Components/NewPoll';
+import RegPoll from './Components/RegPoll';
 
 export default function BasicExample() {
   return (
@@ -26,7 +26,7 @@ export default function BasicExample() {
 				<Navbar.Collapse id='responsive-navbar-nav'>
 				<Nav className='mx-auto'></Nav>
 				<Nav>
-					<Nav.Link href='/NewPoll'>New Poll</Nav.Link>
+					<Nav.Link href='/RegPoll'>Register poll</Nav.Link>
 					<Nav.Link onClick={window.accountId === "" ? login : logout}>
 					{window.accountId === "" ? "Login" : window.accountId}
 					</Nav.Link>
@@ -38,8 +38,8 @@ export default function BasicExample() {
 				<Route exact path='/'>
 					<Home />
 				</Route>
-				<Route exact path='/Newpoll'>
-					<NewPoll />
+				<Route exact path='/RegPoll'>
+					<RegPoll />
 				</Route>
 				<Route exact path='/PollingStation'>
 					<PollingStation />
