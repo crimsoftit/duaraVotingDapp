@@ -1,9 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-export class NewPoll extends React.Component {
-	render() {
-	  return (
-		<h1>NewPoll</h1>
-	  )
-	}
-}
+const NewPoll = () => {
+	return (
+		<div>
+			NewPoll
+		</div>
+	);
+};
+
+export default NewPoll;
