@@ -1,6 +1,6 @@
 .barHouse{
     height: 6vh;
-    background: black;
+    background: green;
     color:white;
     display:grid;
     grid-template-columns: 4fr 1fr;
