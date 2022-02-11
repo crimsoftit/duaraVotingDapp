@@ -1,9 +1,11 @@
-import { setGreeting } from '..'
 import { storage, Context } from 'near-sdk-as'
+import { addURL, getURL, addToPrompts, getAllPrompts} from '..'
 
-describe('Greeting ', () => {
-  it('should be set and read', () => {
-    setGreeting('hello world')
-    storage.get<string>(Context.sender)
-  })
+describe('Voting', () => {
+	it('should add url', () => {
+		addURL('manu', "test")
+		storage.get<string>(Context.sender)
+		expect(getURL('manu')).toBe('test', 'should return test')
+	})
+
 })
