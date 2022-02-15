@@ -30,7 +30,7 @@ export function didVote (prompt:string, voter:string):bool {
 		let getArray = voterParticipation.getSome(prompt);
 		return getArray.includes(voter)
 	} else {
-		logging.log("did not find prompt")
+		logging.log("did not find prompt ...")
 		return false
 	}
 }
@@ -41,6 +41,15 @@ export function getVotes (prompt:string):i32[] {
 	} else {
 		logging.log("0 prompts found for this vote")
 		return[0,0]
+	}
+}
+
+export function getCandPair (prompt:string):string[] {
+	if (candidatePair.contains(prompt)) {
+		return candidatePair.getSome(prompt)
+	} else {
+		logging.log("didn't find any prompts ...")
+		return []
 	}
 }
 
@@ -62,15 +71,28 @@ export function incrementVote (prompt:string, index:i32):void {
 		let newValue = tempValue + 1;
 		tempArray[index] = newValue;
 		votes.set(prompt, tempArray)
+	} else {
+		let newVotesArray = [0,0];
+		newVotesArray[index] = 1;
+		votes.set(prompt, newVotesArray);
 	}
 }
 
 export function addToPrompts (prompt: string):void {
 	if (prompts.contains('allArrays')) {
+		logging.log("addition to prompts")
 		let tempArray = prompts.getSome('allArrays')
 		tempArray.push(prompt)
+		prompts.set("allArrays", tempArray);
+	} else {
+		prompts.set('allArrays', [prompt])
 	}
 	logging.log('added to prompts array')
+}
+
+export function clearPrompts():void {
+	prompts.delete('allArrays')
+	logging.log('prompts array cleared ...')
 }
 
 export function storeVoter (prompt:string, voter:string):void {

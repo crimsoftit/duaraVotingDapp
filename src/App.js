@@ -12,11 +12,11 @@ import './global.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // import components
-import PollingStation from './Components/PollingStation';
+import PollingBooth from './Components/PollingBooth';
 import Home from './Components/Home';
 import RegPoll from './Components/RegPoll';
 
-export default function BasicExample() {
+export default function App() {
   return (
 		<Router>
 			<Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
@@ -41,8 +41,8 @@ export default function BasicExample() {
 				<Route exact path='/RegPoll'>
 					<RegPoll />
 				</Route>
-				<Route exact path='/PollingStation'>
-					<PollingStation />
+				<Route exact path='/PollingBooth'>
+					<PollingBooth />
 				</Route>
 			</Switch>
 		</Router>

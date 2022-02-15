@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import cand1 from '../assets/cand1.png';
 import cand2 from '../assets/cand2.png';
 
-const PollingStation = (props) => {
+const PollingBooth = (props) => {
 	const [cand1Url, changeCand1Url] = useState(cand1);
 	const [cand2Url, changeCand2Url] = useState(cand2);
 	const [displayResults, alterResultsDisplay] = useState(false);
@@ -107,4 +107,4 @@ const PollingStation = (props) => {
 	);
 };
 
-export default PollingStation;
+export default PollingBooth;
