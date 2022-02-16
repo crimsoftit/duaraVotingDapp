@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import cand1 from '../assets/cand1.png';
 import cand2 from '../assets/cand2.png';
@@ -6,7 +6,59 @@ import cand2 from '../assets/cand2.png';
 const PollingBooth = (props) => {
 	const [cand1Url, changeCand1Url] = useState(cand1);
 	const [cand2Url, changeCand2Url] = useState(cand2);
-	const [displayResults, alterResultsDisplay] = useState(false);
+	const [displayResults, updateResultsDisplay] = useState(false);
+	const [btnStatus, updateBtnStatus] = useState(false);
+	const [cand1Votes, updateCand1Votes] = useState("--");
+	const [cand2Votes, updateCand2Votes] = useState("--");
+	const [prompt, updatePrompt] = useState("--");
+
+	useEffect(() => {
+
+		const fetchDetails = async () => {
+
+			// update votes
+			let noOfVotes = await window.contract.getVotes({
+				prompt: localStorage.getItem('prompt'),
+			});
+			updateCand1Votes(noOfVotes[0])
+			updateCand2Votes(noOfVotes[1])
+
+			// update image urls
+			changeCand1Url(
+				await window.contract.getURL({
+					name: localStorage.getItem('candidate_1'),
+				})
+			);
+			changeCand2Url(
+				await window.contract.getURL({
+					name: localStorage.getItem('candidate_2'),
+				})
+			);
+			updatePrompt(localStorage.getItem('prompt'));
+
+			// check voter's voting status
+			let voteStatus = await window.contract.didVote({
+				prompt: localStorage.getItem('prompt'),
+				voter: window.accountId
+			})
+
+			updateResultsDisplay(voteStatus);
+			updateBtnStatus(voteStatus);
+		}
+		fetchDetails();
+	}, []);
+
+	const addVote = async (index) => {
+		await window.contract.incrementVote ({
+			prompt: localStorage.getItem("prompt"),
+			index: index
+		});
+		await window.contract.storeVoter ({
+			prompt: localStorage.getItem("prompt"),
+			voter: window.accountId,
+		});
+		updateResultsDisplay(true);
+	}
 
 	return (
 		<Container>
@@ -37,13 +89,13 @@ const PollingBooth = (props) => {
 								fontSize: '3vw',
 								padding: '12px',
 								backgroundColor: '#E3DEDD'
-							}}>3</div>
+							}}>{ cand1Votes }</div>
 						</Row>:null }
 						<Row className='justify-content-center d-flex' style={{
 							marginTop: '1vh',
 							width: '10vw'
 						}}>
-							<Button style={{
+							<Button disabled = { displayResults } onClick={ () => addVote(0) } style={{
 								backgroundColor: 'green',
 								border: 'none'
 							}}>vote</Button>
@@ -60,7 +112,7 @@ const PollingBooth = (props) => {
 						padding: '3vw',
 						textAlign: 'center',
 						marginTop: '8vh'
-					}}>who'd win the nairobi gubernatorial seat?</div>
+					}}>{prompt}</div>
 				</Col>
 
 				<Col className='justify-content-center d-flex'>
@@ -89,13 +141,13 @@ const PollingBooth = (props) => {
 								fontSize: '3vw',
 								padding: '12px',
 								backgroundColor: '#E3DEDD'
-							}}>3</div>
+							}}>{ cand2Votes }</div>
 						</Row>:null }
 						<Row className='justify-content-center d-flex' style={{
 							marginTop: '1vh',
 							width: '10vw'
 						}}>
-							<Button style={{
+							<Button disabled = { displayResults } onClick={ () => addVote(1) } style={{
 								backgroundColor: 'green',
 								border: 'none'
 							}}>vote</Button>

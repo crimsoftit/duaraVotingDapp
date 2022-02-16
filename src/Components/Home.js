@@ -1,8 +1,18 @@
-import React from 'react';
+import { Tab } from 'bootstrap';
+import React, { useEffect, useState } from 'react';
 import { Container, Button, Table } from 'react-bootstrap';
 
-const Home = () => {
-    const promptList = ["who will win the kenyan presidential elections?", "who will win the Nairobi gubernatorial seat?"];
+const Home = (props) => {
+    const [promptsList, updatePromptsList] = useState([]);
+
+    useEffect(() => {
+        const getPrompts = async () => {
+            updatePromptsList(await window.contract.getAllPrompts());
+            console.log(await window.contract.getAllPrompts());
+        };
+        getPrompts();
+    }, []);
+
     return (
         <Container>
             <Table style={{ margin: "5px" }} responsive striped bordered hover>
@@ -15,14 +25,18 @@ const Home = () => {
                 </thead>
                 <tbody>
                     {
-                        promptList.map((el,index) => {
+                        promptsList.map((el,index) => {
                             return (
                                 <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>{el}</td>
                                 <td>
                                     {" "}
-                                    <Button>Poll details</Button>
+                                    <Button onClick={ () => props.updateCandidates(el) } style={{
+                                        backgroundColor: 'green',
+                                        border: 'none'
+                                    }}>Poll details
+                                    </Button>
                                 </td>
                             </tr>
                             )})

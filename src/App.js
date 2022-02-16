@@ -11,13 +11,25 @@ import { login, logout } from './utils';
 import './global.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import props from 'prop-types';
+
 // import components
 import PollingBooth from './Components/PollingBooth';
 import Home from './Components/Home';
 import RegPoll from './Components/RegPoll';
 
 export default function App() {
-  return (
+
+	const updateCandidatesFunction = async (prompt) => {
+		console.log(prompt);
+		let cPair = await window.contract.getCandPair({ prompt:prompt })
+		localStorage.setItem('candidate_1', cPair[0]);
+		localStorage.setItem('candidate_2', cPair[1]);
+		localStorage.setItem('prompt', prompt);
+		window.location.replace(window.location.href + 'PollingBooth');
+	}
+
+  	return (
 		<Router>
 			<Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
 			<Container>
@@ -36,7 +48,7 @@ export default function App() {
 			</Navbar>
 			<Switch>
 				<Route exact path='/'>
-					<Home />
+					<Home updateCandidates = { updateCandidatesFunction } />
 				</Route>
 				<Route exact path='/RegPoll'>
 					<RegPoll />
@@ -46,5 +58,5 @@ export default function App() {
 				</Route>
 			</Switch>
 		</Router>
-  );
+  	);
 }
