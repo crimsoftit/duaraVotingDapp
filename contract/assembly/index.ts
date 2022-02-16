@@ -56,12 +56,18 @@ export function getCandPair (prompt:string):string[] {
 
 // change methods
 export function addURL(name: string, url:string):void {
+	assert(name.length > 0, 'name field cannot be blank');
+	assert(url.length > 0, "url field cannot be blank");
 	candidateUrl.set(name, url);
 	logging.log("url added for " + name);
 }
 
 export function addCandPair (prompt:string, cand1:string, cand2:string):void {
-	candidatePair.set(prompt, [cand1, cand2])
+	assert(prompt.length > 2, 'invalid value for prompt');
+	assert(cand1.length > 0, "1st aspirant's name can't be blank");
+	assert(cand2.length > 0, "2nd aspirant name can't be blank");
+	candidatePair.set(prompt, [cand1, cand2]);
+	logging.log("candidate pair added ...");
 }
 
 export function incrementVote (prompt:string, index:i32):void {
@@ -79,6 +85,7 @@ export function incrementVote (prompt:string, index:i32):void {
 }
 
 export function addToPrompts (prompt: string):void {
+	assert(prompt.length > 2, 'prompt should have more than 2 characters');
 	if (prompts.contains('allArrays')) {
 		logging.log("addition to prompts")
 		let tempArray = prompts.getSome('allArrays')
