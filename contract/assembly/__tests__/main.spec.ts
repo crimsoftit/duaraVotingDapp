@@ -1,5 +1,5 @@
-import { storage, Context } from 'near-sdk-as'
-import { addURL, getURL, addToPrompts, getAllPrompts, addCandPair, getCandPair, incrementVote, getVotes } from '..'
+import { storage, Context, VM } from 'near-sdk-as'
+import { addURL, getURL, addToPrompts, getAllPrompts, addCandPair, getCandPair, incrementVote, getVotes, storeVoter, didVote } from '..'
 
 describe('Voting', () => {
 	it('should add and retrieve url', () => {
@@ -20,9 +20,24 @@ describe('Voting', () => {
 		expect(candArr.length).toBe(2, 'should have at least 1 candidate pair')
 	})
 
+	it ("should return a log message upon adding a candidate pair", () => {
+		addCandPair('nani mnoma?', 'manu', 'vini')
+		expect(VM.logs()).toContainEqual('candidate pair added ...')
+	})
+
 	it ('should increment votes', () => {
 		incrementVote('nani mnoma?', 1)
 		const voteArr = getVotes('nani mnoma?')
 		expect(voteArr.length).toBeGreaterThan(1, 'should increment votes')
+	})
+
+	it ("should return a log message upon adding candidate's URL", () => {
+		addURL('manu', 'test')
+		expect(VM.logs()).toContainEqual('url added for manu')
+	})
+
+	it ('should store voter details', () => {
+		storeVoter('nani mnoma?', 'voke')
+		expect(didVote('nani mnoma?', 'voke')).toBe(true, 'should store voter details')
 	})
 })
