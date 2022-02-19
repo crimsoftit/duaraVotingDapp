@@ -1,11 +1,22 @@
 import { storage, Context } from 'near-sdk-as'
-import { addURL, getURL, addToPrompts, getAllPrompts} from '..'
+import { addURL, getURL, addToPrompts, getAllPrompts, addCandPair, getCandPair} from '..'
 
 describe('Voting', () => {
-	it('should add url', () => {
+	it('should add and retrieve url', () => {
 		addURL('manu', "test")
 		storage.get<string>(Context.sender)
 		expect(getURL('manu')).toBe('test', 'should return test')
 	})
 
+	it ('should add and retrieve prompts', () => {
+		addToPrompts("nani mnoma?")
+		const promptsArr = getAllPrompts();
+		expect(promptsArr.length).toBe(1, "prompt should be added")
+	})
+
+	it ('should add and retrieve a candidate pair', () => {
+		addCandPair('nani mnoma?', 'manu', 'vini')
+		const candArr = getCandPair('nani mnoma?');
+		expect(candArr.length).toBe(2, 'should have at least 1 candidate pair')
+	})
 })
