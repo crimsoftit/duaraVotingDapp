@@ -1,8 +1,9 @@
-duaraVoting
+DuaraVoting
 ==================
 
-This [React] app was initialized with [create-near-app]
+A Blockchain-based dApp that attempts to bring voting to the blockchain space making it a transparent, secure, and affordable process to vote on the NEAR blockchain platform, using smart contracts.
 
+Fundamentally, the system would offer its users visibility, transparency, and confidence at every step.
 
 Quick Start
 ===========

@@ -31,7 +31,8 @@ export default function App() {
 
   	return (
 		<Router>
-			<Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
+
+			<Navbar collapseOnSelect expand='lg' bg='green' variant='dark'>
 			<Container>
 				<Navbar.Brand href='/'>Home Page</Navbar.Brand>
 				<Navbar.Toggle aria-controls='responsive-navbar-nav' />
