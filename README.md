@@ -8,16 +8,31 @@ Fundamentally, the system would offer its users visibility, transparency, and co
 Quick Start
 ===========
 
-To run this project locally:
+### Installation
 
-1. Prerequisites: Make sure you've installed [Node.js] ≥ 12
-2. Install dependencies: `yarn install`
-3. Run the local development server: `yarn dev` (see `package.json` for a
-   full list of `scripts` you can run with `yarn`)
+1. clone this repo
+2. To install dependencies: run `yarn install` (or `npm install`)
+3. To build the project: run `yarn build` (or `npm run build`)
+4. Tests/Simulations: run `yarn test` (or `npm run test`)
+5. To run the local development server: run `yarn dev` (see `package.json` for a full list of `scripts` you can run with `yarn`)
 
 Now you'll have a local development environment backed by the NEAR TestNet!
 
 Go ahead and play with the app and the code. As you make code changes, the app will automatically reload.
+
+## File Structure
+
+This contract is designed to be self-contained and so may be extracted into your own projects and used as a starting point.  If you do decide to use this code, please pay close attention to all top level files including:
+
+- NodeJS artifacts
+  - `package.json`: JavaScript project dependencies and several useful scripts
+
+- AssemblyScript artifacts
+  - `asconfig.json`: AssemblyScript project (and per contract) configuration including workspace configuration
+  - `as-pect.config.js`: as-pect unit testing dependency
+  - `src/tsconfig.json`: load TypeScript types
+  - `src/as_types.ts`: AssemblyScript types header file
+  - `src/as-pect.d.ts`: as-pect unit testing types header file
 
 
 Exploring The Code
@@ -101,4 +116,11 @@ On Windows, if you're seeing an error containing `EPERM` it may be related to sp
   [NEAR Wallet]: https://wallet.testnet.near.org/
   [near-cli]: https://github.com/near/near-cli
   [gh-pages]: https://github.com/tschaub/gh-pages
+
+
+### Key Contributors
+
+- [Emmanuel Sindani - @crimsoftit](https://github.com/crimsoftit)
+
+
 # duaraVotingDapp
