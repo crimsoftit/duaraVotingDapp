@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import cand1 from '../assets/cand1.png';
-import cand2 from '../assets/cand2.png';
+import cand1 from '../assets/aspirant1.jpg';
+import cand2 from '../assets/aspirant2.jpg';
 
 const PollingBooth = (props) => {
 	const [cand1Url, changeCand1Url] = useState(cand1);
@@ -24,16 +24,16 @@ const PollingBooth = (props) => {
 			updateCand2Votes(noOfVotes[1])
 
 			// update image urls
-			changeCand1Url(
-				await window.contract.getURL({
-					name: localStorage.getItem('candidate_1'),
-				})
-			);
-			changeCand2Url(
-				await window.contract.getURL({
-					name: localStorage.getItem('candidate_2'),
-				})
-			);
+			// changeCand1Url(
+			// 	await window.contract.getURL({
+			// 		name: localStorage.getItem('candidate_1'),
+			// 	})
+			// );
+			// changeCand2Url(
+			// 	await window.contract.getURL({
+			// 		name: localStorage.getItem('candidate_2'),
+			// 	})
+			// );
 			updatePrompt(localStorage.getItem('prompt'));
 
 			// check voter's voting status
@@ -62,10 +62,22 @@ const PollingBooth = (props) => {
 
 	return (
 		<Container>
+			<Row className="mb-3" style={{
+				marginTop: '4vh',
+				marginBottom: '8vh',
+				textAlign: 'center'
+			}}>
+				<Col className='justify-content-center d-flex'>
+					<h3 style={{ margin: '0 auto'}}>Polling Booth</h3>
+				</Col>
+				<br />
+				<hr />
+			</Row>
+			
 			<Row>
 				<Col className='justify-content-center d-flex'>
 					<Container>
-						<Row style={{ marginTop: '8vh', backgroundColor: "#E3DEDD" }}>
+						<Row style={{ marginTop: '4vh', backgroundColor: "#E3DEDD", borderRadius: '10px' }}>
 							<div style={{
 								display: 'flex',
 								justifyContent: 'center',
@@ -73,7 +85,8 @@ const PollingBooth = (props) => {
 							}}>
 								<img style={{ 
 									height: '30vh',
-									width: '15vw'
+									width: '15vw',
+									borderRadius: '50%'
 								}}
 									src={ cand1Url }>
 								</img>
@@ -111,21 +124,23 @@ const PollingBooth = (props) => {
 						alignItems: 'center',
 						padding: '3vw',
 						textAlign: 'center',
-						marginTop: '8vh'
+						marginTop: '8vh',
+						borderRadius: '10px'
 					}}>{prompt}</div>
 				</Col>
 
 				<Col className='justify-content-center d-flex'>
 					<Container>
-						<Row style={{ marginTop: '8vh', backgroundColor: "#E3DEDD" }}>
+						<Row style={{ marginTop: '4vh', backgroundColor: "#E3DEDD", borderRadius: '10px' }}>
 							<div style={{
 								display: 'flex',
 								justifyContent: 'center',
-								padding: '2vw'
+								padding: '2vw',
 							}}>
 								<img style={{ 
 									height: '30vh',
-									width: '15vw'
+									width: '15vw',
+									borderRadius: '50%'
 								}}
 									src={ cand2Url }>
 								</img>
@@ -145,7 +160,8 @@ const PollingBooth = (props) => {
 						</Row>:null }
 						<Row className='justify-content-center d-flex' style={{
 							marginTop: '1vh',
-							width: '10vw'
+							width: '10vw',
+							borderRadius: '10px'
 						}}>
 							<Button disabled = { displayResults } onClick={ () => addVote(1) } style={{
 								backgroundColor: 'green',

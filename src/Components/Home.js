@@ -35,7 +35,7 @@ const Home = (props) => {
                                     <Button onClick={ () => props.updateCandidates(el) } style={{
                                         backgroundColor: 'green',
                                         border: 'none'
-                                    }}>Poll details
+                                    }}>Visit Pollbooth
                                     </Button>
                                 </td>
                             </tr>

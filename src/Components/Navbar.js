@@ -18,9 +18,8 @@ class Navbar extends Component {
     render() {
         return (
             <div className="barHouse">
-                <div className="pageTitle">BlockShop</div> 
-        <div onClick={(window.accountId!=='')?logout:login} className="account">{(window.accountId!=='')?window.accountId:'Please Login'}</div>
-                
+                <div className="pageTitle">DuaraVotingDapp</div> 
+                <div onClick={(window.accountId!=='')?logout:login} className="account">{(window.accountId!=='')?window.accountId:'Please Login'}</div>
             </div>
         );
     }
