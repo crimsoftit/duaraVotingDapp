@@ -94,7 +94,7 @@ export function addToPrompts (prompt: string):void {
 	} else {
 		prompts.set('allArrays', [prompt])
 	}
-	logging.log('added to prompts array')
+	logging.log('added to prompts array ...')
 }
 
 export function clearPrompts():void {

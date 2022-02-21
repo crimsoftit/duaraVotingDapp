@@ -108,7 +108,7 @@ const PollingBooth = (props) => {
 							marginTop: '1vh',
 							width: '10vw'
 						}}>
-							<Button disabled = { displayResults } onClick={ () => addVote(0) } style={{
+							<Button disabled = { displayResults } onClick={ () => addVote(1) } style={{
 								backgroundColor: 'green',
 								border: 'none'
 							}}>vote</Button>

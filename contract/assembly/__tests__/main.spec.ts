@@ -1,5 +1,5 @@
 import { storage, Context, VM } from 'near-sdk-as'
-import { addURL, getURL, addToPrompts, getAllPrompts, addCandPair, getCandPair, incrementVote, getVotes, storeVoter, didVote } from '..'
+import { addURL, getURL, addToPrompts, getAllPrompts, addCandPair, getCandPair, incrementVote, getVotes, storeVoter, didVote, clearPrompts } from '..'
 
 describe('Voting', () => {
 	it('should add and retrieve url', () => {
@@ -12,6 +12,11 @@ describe('Voting', () => {
 		addToPrompts("nani mnoma?")
 		const promptsArr = getAllPrompts();
 		expect(promptsArr.length).toBe(1, "prompt should be added")
+	})
+
+	it ('should return the correct log message', () => {
+		addToPrompts("nani mnoma?")
+		expect(VM.logs()).toContainEqual('added to prompts array ...')
 	})
 
 	it ('should add and retrieve a candidate pair', () => {
@@ -39,5 +44,10 @@ describe('Voting', () => {
 	it ('should store voter details', () => {
 		storeVoter('nani mnoma?', 'voke')
 		expect(didVote('nani mnoma?', 'voke')).toBe(true, 'should store voter details')
+	})
+
+	it ('should return log messages upon clearPrompts', () => {
+		clearPrompts()
+		expect(VM.logs()).toContainEqual('prompts array cleared ...')
 	})
 })
